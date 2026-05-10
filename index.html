@@ -18,7 +18,6 @@
     <meta property="og:type" content="website" />
 
     <link rel="icon" type="image/png" href="loguito.png" />
-
     <link
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap"
       rel="stylesheet"
@@ -43,7 +42,7 @@
       <section class="info-box">
         <p>
           <a
-            href="https://maps.google.com/?q=Cafferata+1062,+Rosario"
+            href="https://maps.google.com/?q=Cafferata+1062,Rosario"
             target="_blank"
             rel="noopener"
             class="location-link"
@@ -80,22 +79,19 @@
 
         <div class="reviews-form" id="form-opinion" style="display: none">
           <h3>Tu opinión nos importa</h3>
-          <input
-            type="text"
-            id="rev-nombre"
-            placeholder="Tu nombre"
-            class="input-review"
-          />
+          <input type="text" id="rev-nombre" placeholder="Tu nombre" />
+
           <div class="stars-rating">
-            <span class="star" data-value="5">★</span>
-            <span class="star" data-value="4">★</span>
-            <span class="star" data-value="3">★</span>
-            <span class="star" data-value="2">★</span>
             <span class="star" data-value="1">★</span>
+            <span class="star" data-value="2">★</span>
+            <span class="star" data-value="3">★</span>
+            <span class="star" data-value="4">★</span>
+            <span class="star" data-value="5">★</span>
           </div>
+
           <textarea
             id="rev-comentario"
-            placeholder="¿Cómo fue tu experiencia?"
+            placeholder="¿Cómo fue tu experiencia en NaNina?"
           ></textarea>
           <button id="btnEnviarReseña" onclick="enviarReseña()">
             Publicar Comentario
@@ -121,9 +117,15 @@
         href="https://www.instagram.com/na.nina_studio/"
         target="_blank"
         rel="noopener"
-        class="nombre-firma"
-        >@na.nina_studio</a
+        class="instagram-link"
       >
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"
+          alt="Instagram"
+          class="ig-icon"
+        />
+        <span>@na.nina_studio</span>
+      </a>
     </footer>
 
     <script src="script.js"></script>

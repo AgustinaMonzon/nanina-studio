@@ -1,4 +1,3 @@
-// ==================== CONFIGURACIÓN ====================
 const urlAPI = 'https://script.google.com/macros/s/AKfycbw87nIVDPQ6bNHsXONfJRHzXvfx_bX4GKhVJYxb8XWiuatDmtBeXHm_IC8RyiO7EzIyRA/exec';
 
 const hC = ["08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00"];
@@ -12,23 +11,17 @@ const disp = {
 const nombresDias = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
 const sD = document.getElementById('dia');
 const sH = document.getElementById('hora');
+let estrellasSel = 0;
 
-// Función auxiliar para normalizar texto (quita tildes y espacios)
-const normalizar = (texto) => {
-    if (!texto) return "";
-    return texto.toString().toLowerCase()
-        .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // Quita tildes
-        .trim();
-};
+const normalizar = (texto) => texto ? texto.toString().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim() : "";
 
 function init() {
-    const ahora = new Date();
-    const hoyNumero = ahora.getDate();
+    const hoy = new Date().getDate();
     if (!sD) return;
     sD.innerHTML = '';
     Object.keys(disp).forEach(d => {
         const numeroDia = parseInt(d.match(/\d+/));
-        if (numeroDia >= hoyNumero) {
+        if (numeroDia >= hoy) {
             let o = document.createElement('option');
             o.value = d; o.text = d;
             sD.appendChild(o);
@@ -36,16 +29,26 @@ function init() {
     });
     if (sD.options.length > 0) upd(); 
     cargarReseñas();
+
+    // LÓGICA DE ESTRELLAS CORREGIDA
+    const stars = document.querySelectorAll('.star');
+    stars.forEach(s => {
+        s.onclick = (e) => {
+            estrellasSel = parseInt(e.target.getAttribute('data-value'));
+            stars.forEach(x => {
+                const val = parseInt(x.getAttribute('data-value'));
+                x.classList.toggle('active', val <= estrellasSel);
+            });
+        };
+    });
 } 
 
 async function upd() {
-    if (!sD || !sD.value) return;
+    if (!sD.value) return;
     const dS = sD.value;
     const ahora = new Date();
     const hoyLabel = `${nombresDias[ahora.getDay()]} ${ahora.getDate()}`;
-    
     sH.innerHTML = '<option>Cargando...</option>';
-    sH.disabled = true;
 
     try {
         const res = await fetch(`${urlAPI}?sheet=Agenda`);
@@ -55,59 +58,29 @@ async function upd() {
         sH.innerHTML = '';
         (disp[dS] || []).forEach(h => {
             const [hT, mT] = h.split(':').map(Number);
-            
-            // 1. Filtro: ¿Ya pasó la hora hoy?
-            let yaPaso = false;
-            if (normalizar(dS) === normalizar(hoyLabel)) {
-                if (hT < ahora.getHours() || (hT === ahora.getHours() && mT <= ahora.getMinutes() + 5)) {
-                    yaPaso = true;
-                }
-            }
+            let yaPaso = (normalizar(dS) === normalizar(hoyLabel)) && (hT < ahora.getHours() || (hT === ahora.getHours() && mT <= ahora.getMinutes() + 5));
 
-            // 2. Filtro: ¿Está en el Excel de Agenda?
-            const estaOcupado = ocupados.some(t => {
-                const fechaExcel = normalizar(t.fecha);
-                const fechaWeb = normalizar(dS);
-                // Extrae HH:mm del Excel para ignorar segundos o fechas largas
-                const horaExcel = t.hora ? t.hora.toString().match(/(\d{1,2}):(\d{2})/)?.[0].padStart(5, '0') : "";
-                const horaWeb = h.padStart(5, '0');
-                
-                return fechaExcel === fechaWeb && horaExcel === horaWeb;
+            const ocupado = ocupados.some(t => {
+                const fE = normalizar(t.fecha);
+                const fW = normalizar(dS);
+                const hE = t.hora ? t.hora.toString().match(/(\d{1,2}):(\d{2})/)?.[0].padStart(5, '0') : "";
+                return fE === fW && hE === h.padStart(5, '0');
             });
 
-            if (!yaPaso && !estaOcupado) {
+            if (!yaPaso && !ocupado) {
                 let o = document.createElement('option');
                 o.value = h; o.text = h + " hs";
                 sH.appendChild(o);
             }
         });
-
-        const hay = sH.options.length > 0;
-        if (document.getElementById('btnWhatsapp')) document.getElementById('btnWhatsapp').disabled = !hay;
-        sH.disabled = !hay;
-        if (!hay) sH.innerHTML = '<option>Sin turnos</option>';
-    } catch (e) {
-        sH.innerHTML = '<option>Error</option>';
-    }
+        document.getElementById('btnWhatsapp').disabled = sH.options.length === 0;
+    } catch (e) { sH.innerHTML = '<option>Error</option>'; }
 }
 
-// ... mantener funciones de reseñas y enviarTurno igual ...
-
-// Las funciones enviarTurno(), enviarReseña() y cargarReseñas() se mantienen igual que antes
 function enviarTurno() {
     const msg = `Hola Nanina! 👋 Quiero reservar un turno para el ${sD.value} a las ${sH.value} hs.`;
     window.open(`https://wa.me/5493415778540?text=${encodeURIComponent(msg)}`, '_blank');
 }
-
-let estrellasSel = 0;
-document.querySelectorAll('.star').forEach(s => {
-    s.onclick = (e) => {
-        estrellasSel = e.target.dataset.value;
-        document.querySelectorAll('.star').forEach(x => {
-            x.classList.toggle('active', x.dataset.value <= estrellasSel);
-        });
-    };
-});
 
 function toggleReviewForm() {
     const f = document.getElementById('form-opinion');
@@ -117,39 +90,44 @@ function toggleReviewForm() {
 async function enviarReseña() {
     const n = document.getElementById('rev-nombre').value;
     const c = document.getElementById('rev-comentario').value;
-    if (!n || !c || estrellasSel === 0) return alert("Por favor completá todos los campos.");
+    if (!n || !c || estrellasSel === 0) return alert("Por favor completá todo.");
+    
     try {
         await fetch(`${urlAPI}?sheet=Reseñas`, {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: { 'Content-Type': 'application/json' },
+            method: 'POST', mode: 'no-cors',
             body: JSON.stringify({ nombre: n, estrellas: estrellasSel, comentario: c, fecha: new Date().toLocaleDateString('es-AR') })
         });
-        alert("¡Gracias por tu opinión!");
+        alert("¡Gracias por tu opinión! 💕");
         location.reload();
     } catch (e) { alert("Error al enviar."); }
 }
 
 async function cargarReseñas() {
     const cont = document.getElementById('contenedor-resenas');
-    if (!cont) return;
     try {
         const res = await fetch(`${urlAPI}?sheet=Reseñas`);
         const datos = await res.json();
+        
+        cont.innerHTML = ''; // Limpia el contenedor
+
+        // === AGREGÁ ESTE BLOQUE AQUÍ ===
         if (!Array.isArray(datos) || datos.length === 0) {
-            cont.innerHTML = "<p>¡Sé la primera en opinar! 💕</p>";
-            return;
+            // Si no hay datos, muestra tu frase preferida con corazones
+            cont.innerHTML = '<p class="sin-resenas">¡Sé la primera en opinar! 💕</p>';
+            return; // Detiene la función aquí
         }
-        cont.innerHTML = '';
+        // === FIN DEL BLOQUE ===
+
+        // El resto del código para mostrar las reseñas existentes sigue igual...
         datos.reverse().slice(0, 10).forEach(r => {
             const div = document.createElement('div');
             div.className = 'resena-card';
             const e = parseInt(r.estrellas) || 5;
-            div.innerHTML = `<strong>${r.nombre || 'Anónimo'}</strong><div style="color:#D4AF37">${'★'.repeat(e)}${'☆'.repeat(5-e)}</div><p>${r.comentario || ''}</p>`;
+            div.innerHTML = `<strong>${r.nombre}</strong><div style="color:#C5A059">${'★'.repeat(e)}${'☆'.repeat(5-e)}</div><p>${r.comentario}</p>`;
             cont.appendChild(div);
         });
-    } catch (e) { cont.innerHTML = "<p>Aún no hay reseñas.</p>"; }
+    } catch (e) { cont.innerHTML = "No hay reseñas aún."; }
 }
 
-if (sD) sD.onchange = upd;
+sD.onchange = upd;
 window.onload = init;

@@ -14,20 +14,21 @@ body {
   background-color: #FAF8F8;
   color: var(--texto-principal);
   font-family: 'Montserrat', sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px 15px;
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  padding: 20px 15px; 
   min-height: 100vh;
 }
 
+/* CONTENEDOR PRINCIPAL */
 .booking-card {
-  max-width: 450px;
-  width: 100%;
-  background: var(--fondo-crema);
+  max-width: 450px; 
+  width: 100%; 
+  background: var(--fondo-crema); 
   border-radius: 30px;
-  overflow: hidden;
-  text-align: center;
+  overflow: hidden; 
+  text-align: center; 
   box-shadow: var(--sombra-suave);
   border: 1px solid rgba(212, 165, 165, 0.2);
 }
@@ -35,166 +36,206 @@ body {
 .floral-top, .floral-bottom { width: 100%; line-height: 0; }
 .floral-img { width: 100%; height: auto; display: block; }
 
-/* --- LOGO: MÁS GRANDE Y SUBIDO --- */
-.header-image-container {
-  width: 100%;
-  padding-top: 5px;
-  margin-bottom: 0;
+.main-photo { 
+  width: 100%; 
+  max-width: 320px; 
+  margin: -15px auto 0; 
+  display: block; 
+  filter: drop-shadow(0 5px 15px rgba(0,0,0,0.07)); 
 }
 
-.main-photo {
-  width: 100%;
-  max-width: 320px; /* Aumentado */
-  margin: -15px auto 0; /* Sube hacia las flores superiores */
-  display: block;
-  filter: drop-shadow(0 5px 15px rgba(0,0,0,0.07));
+.subtitle { 
+  font-size: 1rem; 
+  letter-spacing: 6px; 
+  color: var(--dorado); 
+  text-transform: uppercase; 
+  font-weight: 600; 
+  margin: 5px 0; 
 }
 
-/* --- CABECERA MEJORADA --- */
-.subtitle {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 1.00rem;
-  letter-spacing: 6px; /* Más aire entre letras */
-  color: var(--dorado);
-  text-transform: uppercase;
-  font-weight: 600;
-  margin-top: 5px;
-  margin-bottom: 5px;
+.gold-divider { 
+  width: 40px; 
+  height: 1px; 
+  background: var(--dorado-brillante); 
+  margin: 10px auto 25px; 
+  opacity: 0.6; 
 }
 
-.gold-divider {
-  width: 40px;
-  height: 1px;
-  background: var(--dorado-brillante);
-  margin: 10px auto 25px;
-  opacity: 0.6;
+.info-box { margin-bottom: 35px; padding: 0 25px; }
+.location-link { 
+  color: var(--texto-principal); 
+  text-decoration: none; 
+  font-weight: 500; 
+  border-bottom: 1px solid var(--dorado-brillante); 
+  font-size: 0.9rem; 
+}
+.horario-texto { 
+  font-size: 0.95rem; 
+  color: var(--texto-secundario); 
+  margin-top: 10px; 
 }
 
-/* --- BLOQUE DE INFO --- */
-.info-box {
-  margin-bottom: 35px;
-  padding: 0 25px;
+/* SECCIÓN TURNERO (AGRANDADA PARA MÓVIL) */
+.booking-form { 
+  padding: 35px 25px; 
+  margin: 0 15px 30px; 
+  background: #FFFFFF; 
+  border-radius: 20px; 
+  border: 1px solid var(--rosa-suave); 
 }
 
-.location-link {
-  color: var(--texto-principal);
-  text-decoration: none;
-  font-weight: 500;
-  border-bottom: 1px solid var(--dorado-brillante);
-  font-size: 0.9rem;
-}
-
-.horario-texto {
-  font-size: 0.95rem;
-  color: var(--texto-secundario);
-  margin-top: 10px;
-}
-
-/* --- CAJA DE RESERVAS --- */
-.booking-form {
-  padding: 30px 20px;
-  margin: 0 25px 30px;
-  background: #FFFFFF;
-  border-radius: 20px;
-  border: 1px solid var(--rosa-suave);
-  box-shadow: 0 5px 25px rgba(197, 160, 89, 0.08);
-}
-
-.booking-form h3 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.6rem;
-  color: var(--texto-principal);
-  margin-bottom: 15px;
-  font-style: italic;
+.booking-form h3 { 
+  font-family: 'Cormorant Garamond', serif; 
+  font-size: 1.8rem; 
+  color: var(--texto-principal); 
+  margin-bottom: 20px; 
+  font-style: italic; 
 }
 
 .form-group { text-align: left; margin-bottom: 15px; }
-.form-group label {
-  font-size: 0.7rem;
-  color: var(--dorado);
-  text-transform: uppercase;
-  font-weight: 600;
-  display: block;
-  margin-bottom: 5px;
+.form-group label { 
+  font-size: 0.8rem; 
+  color: var(--dorado); 
+  text-transform: uppercase; 
+  font-weight: 600; 
+  display: block; 
+  margin-bottom: 8px; 
 }
 
-select {
-  width: 100%;
-  padding: 12px;
-  background: #FAFAFA;
-  border: 1px solid #E0E0E0;
-  border-radius: 8px;
-  font-family: 'Montserrat', sans-serif;
-  color: var(--texto-principal);
+select { 
+  width: 100%; 
+  padding: 15px; 
+  background: #FAFAFA; 
+  border: 1px solid #E0E0E0; 
+  border-radius: 10px; 
+  font-family: 'Montserrat'; 
+  color: var(--texto-principal); 
+  font-size: 1rem;
 }
 
-#btnWhatsapp {
-  background-color: var(--texto-principal);
-  color: #FFF;
-  border: none;
-  padding: 18px;
+#btnWhatsapp, #btnEnviarReseña {
+  background-color: var(--texto-principal); 
+  color: #FFF; 
+  border: none; 
+  padding: 20px; 
   border-radius: 50px;
-  width: 100%;
-  font-weight: 500;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
+  width: 100%; 
+  font-weight: 600; 
+  font-size: 1.1rem;
+  cursor: pointer; 
   transition: 0.3s;
-  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
-#btnWhatsapp:hover { background-color: var(--dorado); transform: translateY(-2px); }
+#btnWhatsapp:hover, #btnEnviarReseña:hover { 
+  background-color: var(--dorado); 
+  transform: translateY(-2px); 
+}
+
 #btnWhatsapp:disabled { opacity: 0.5; cursor: not-allowed; }
 
-/* --- RESEÑAS --- */
+/* ESTILOS DE RESEÑAS */
 .reviews-section { padding: 25px; }
-#toggle-review-form {
-  background: none;
-  border: 1.5px solid var(--dorado);
-  color: var(--dorado);
-  padding: 10px 25px;
-  border-radius: 25px;
-  cursor: pointer;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1rem;
-  font-style: italic;
-  margin-bottom: 20px;
+
+#toggle-review-form { 
+  background: none; 
+  border: 1.5px solid var(--dorado); 
+  color: var(--dorado); 
+  padding: 10px 25px; 
+  border-radius: 25px; 
+  cursor: pointer; 
+  font-family: 'Cormorant Garamond'; 
+  font-size: 1rem; 
+  font-style: italic; 
+  margin-bottom: 20px; 
 }
 
-.resena-card {
-  background: #FFF;
-  padding: 18px;
-  margin-bottom: 15px;
-  border-radius: 12px;
-  text-align: left;
-  border-left: 4px solid var(--dorado);
-  box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+.reviews-form { 
+  background: #FFF; 
+  padding: 20px; 
+  border-radius: 20px; 
+  border: 1px solid var(--rosa-suave); 
+  margin-bottom: 25px; 
 }
 
-/* --- FOOTER FINAL MEJORADO --- */
-.site-footer { padding: 40px 20px; text-align: center; }
+.reviews-form input, .reviews-form textarea {
+  width: 100%; 
+  margin: 10px 0; 
+  padding: 12px; 
+  border-radius: 12px; 
+  border: 1px solid #E0D1B9; 
+  font-family: 'Montserrat';
+}
+
+.stars-rating { 
+  font-size: 30px; 
+  margin: 15px 0; 
+  cursor: pointer; 
+  display: flex; 
+  justify-content: center; 
+  gap: 5px; 
+}
+.star { color: #ccc; transition: 0.2s; }
+.star.active { color: var(--dorado) !important; }
+
+.resena-card { 
+  background: #FFF; 
+  padding: 18px; 
+  margin-bottom: 15px; 
+  border-radius: 12px; 
+  text-align: left; 
+  border-left: 4px solid var(--dorado); 
+  box-shadow: 0 2px 10px rgba(0,0,0,0.04); 
+}
+
+.sin-resenas {
+  text-align: center;
+  color: var(--texto-secundario);
+  font-size: 1.1rem;
+  margin: 20px 0;
+  font-weight: 400;
+}
+
+/* FOOTER E INSTAGRAM */
+.site-footer { 
+  padding: 40px 20px; 
+  text-align: center; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
 .history-text { 
   font-family: 'Cormorant Garamond', serif; 
   font-style: italic; 
-  font-size: 1.4rem; 
+  font-size: 1.7rem; 
   color: var(--texto-principal);
-  margin-bottom: 10px; 
+  margin-bottom: 5px; 
 }
 
-.nombre-firma { 
-  color: var(--dorado); 
-  text-decoration: none; 
-  font-size: 1rem; 
-  letter-spacing: 3px; 
+.instagram-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--dorado);
   font-weight: 600;
-  transition: all 0.3s ease;
-  border-bottom: 1px solid transparent;
+  letter-spacing: 1px;
+  transition: 0.3s;
+  font-size: 1rem;
 }
 
-.nombre-firma:hover {
-  color: var(--dorado-brillante);
-  border-bottom-color: var(--dorado-brillante);
-  letter-spacing: 4px;
+.instagram-link:hover {
+  transform: scale(1.05);
+  opacity: 0.8;
+}
+
+.ig-icon {
+  width: 28px; 
+  height: 28px;
+  /* Sin filtros aplicados */
 }
