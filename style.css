@@ -137,39 +137,88 @@ select {
 
 #btnWhatsapp:disabled { opacity: 0.5; cursor: not-allowed; }
 
-/* ESTILOS DE RESEÑAS */
-.reviews-section { padding: 25px; }
+/* --- ESTILOS DE RESEÑAS (CORREGIDO Y AGRANDADO) --- */
+.reviews-section { 
+  padding: 25px; 
+}
 
 #toggle-review-form { 
   background: none; 
   border: 1.5px solid var(--dorado); 
   color: var(--dorado); 
-  padding: 10px 25px; 
+  padding: 12px 30px; /* Más cómodo para clickear */
   border-radius: 25px; 
   cursor: pointer; 
-  font-family: 'Cormorant Garamond'; 
-  font-size: 1rem; 
+  font-family: 'Cormorant Garamond', serif; 
+  font-size: 1.1rem; 
   font-style: italic; 
-  margin-bottom: 20px; 
+  margin-bottom: 25px; 
+  transition: 0.3s;
+}
+
+#toggle-review-form:hover {
+  background-color: var(--fondo-crema);
 }
 
 .reviews-form { 
   background: #FFF; 
-  padding: 20px; 
+  padding: 30px 20px; /* Aumentado para dar aire */
   border-radius: 20px; 
   border: 1px solid var(--rosa-suave); 
-  margin-bottom: 25px; 
+  margin: 0 10px 30px; /* Margen para que no pegue a los bordes en móviles */
+  box-shadow: 0 5px 15px rgba(0,0,0,0.03);
 }
 
-.reviews-form input, .reviews-form textarea {
+.reviews-form h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+  color: var(--texto-principal);
+}
+
+.reviews-form input, 
+.reviews-form textarea {
   width: 100%; 
-  margin: 10px 0; 
-  padding: 12px; 
+  margin: 12px 0; 
+  padding: 15px; /* Campos más altos y fáciles de usar */
   border-radius: 12px; 
   border: 1px solid #E0D1B9; 
-  font-family: 'Montserrat';
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem; /* Evita el zoom automático en iOS */
+  background-color: #FAFAFA;
 }
 
+/* Estrellas interactivas más grandes */
+.stars-rating { 
+  font-size: 35px; /* Tamaño ideal para tocar con el pulgar */
+  margin: 20px 0; 
+  cursor: pointer; 
+  display: flex; 
+  justify-content: center; 
+  gap: 10px; 
+}
+
+.star { color: #ccc; transition: 0.2s; }
+.star.active { color: var(--dorado) !important; }
+
+/* Botón de publicar (coherente con el estilo de WhatsApp) */
+#btnEnviarReseña {
+  background-color: var(--texto-principal); 
+  color: #FFF; 
+  border: none; 
+  padding: 18px; 
+  border-radius: 50px;
+  width: 100%; 
+  font-weight: 600; 
+  font-size: 1.1rem;
+  cursor: pointer; 
+  transition: 0.3s;
+  margin-top: 10px;
+}
+
+#btnEnviarReseña:hover {
+  background-color: var(--dorado);
+}
 .stars-rating { 
   font-size: 30px; 
   margin: 15px 0; 
