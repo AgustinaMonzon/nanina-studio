@@ -17,8 +17,9 @@ body {
   display: flex; 
   flex-direction: column; 
   align-items: center; 
-  padding: 20px 15px 0; /* Padding inferior en 0 para evitar espacio extra */
-  min-height: 100vh;
+  padding: 20px 15px 0; /* Sin padding abajo para evitar el espacio extra */
+  min-height: auto; /* Evita que el móvil fuerce espacio en blanco al final */
+  margin: 0;
 }
 
 /* CONTENEDOR PRINCIPAL (TARJETA SUPERIOR) */
@@ -33,7 +34,11 @@ body {
   border: 1px solid rgba(212, 165, 165, 0.2);
 }
 
-.floral-top, .floral-bottom { width: 100%; line-height: 0; }
+.floral-top, .floral-bottom { 
+  width: 100%; 
+  line-height: 0; 
+}
+
 .floral-img { width: 100%; height: auto; display: block; }
 
 .main-photo { 
@@ -62,6 +67,7 @@ body {
 }
 
 .info-box { margin-bottom: 35px; padding: 0 25px; }
+
 .location-link { 
   color: var(--texto-principal); 
   text-decoration: none; 
@@ -69,6 +75,7 @@ body {
   border-bottom: 1px solid var(--dorado-brillante); 
   font-size: 0.9rem; 
 }
+
 .horario-texto { 
   font-size: 0.95rem; 
   color: var(--texto-secundario); 
@@ -93,6 +100,7 @@ body {
 }
 
 .form-group { text-align: left; margin-bottom: 15px; }
+
 .form-group label { 
   font-size: 0.8rem; 
   color: var(--dorado); 
@@ -138,10 +146,10 @@ select {
 
 #btnWhatsapp:disabled { opacity: 0.5; cursor: not-allowed; }
 
-/* SECCIÓN DE RESEÑAS (ALINEACIÓN EXACTA) */
+/* SECCIÓN DE RESEÑAS (MISMO ANCHO QUE EL TURNERO) */
 .reviews-section { 
   width: 100%;
-  max-width: 450px; /* Para que coincida con la booking-card superior */
+  max-width: 450px; 
   padding: 0; 
 }
 
@@ -189,7 +197,7 @@ select {
 }
 
 .stars-rating { 
-  font-size: 35px; /* Tamaño grande para móvil */
+  font-size: 35px; 
   margin: 20px 0; 
   cursor: pointer; 
   display: flex; 
@@ -204,7 +212,7 @@ select {
 .resena-card { 
   background: #FFF; 
   padding: 18px; 
-  margin: 0 15px 15px; /* Margen lateral para no pegar al borde */
+  margin: 0 15px 15px; 
   border-radius: 12px; 
   text-align: left; 
   border-left: 4px solid var(--dorado); 
@@ -219,15 +227,16 @@ select {
   font-weight: 400;
 }
 
-/* FOOTER E INSTAGRAM */
+/* FOOTER FINAL (LIMPIO Y SIN ESPACIO SOBRANTE) */
 .site-footer { 
-  padding: 20px 20px 40px; 
+  padding: 20px 20px 30px; 
   text-align: center; 
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 15px;
   width: 100%;
+  margin-top: auto;
 }
 
 .history-text { 
@@ -253,4 +262,9 @@ select {
 .ig-icon {
   width: 28px; 
   height: 28px;
+}
+
+/* CORRECCIÓN FINAL PARA MÓVIL */
+.floral-bottom {
+    margin-bottom: -1px;
 }
