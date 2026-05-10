@@ -1,11 +1,11 @@
 const urlAPI = 'https://script.google.com/macros/s/AKfycbw87nIVDPQ6bNHsXONfJRHzXvfx_bX4GKhVJYxb8XWiuatDmtBeXHm_IC8RyiO7EzIyRA/exec';
 
-const hC = ["08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00"];
+const hC = ["09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00"];
 
 const disp = {
-    "Martes 12": hC, "Miércoles 13": hC, "Jueves 14": hC, "Viernes 15": hC, "Sábado 16": hC,
-    "Martes 19": hC, "Miércoles 20": hC, "Jueves 21": hC, "Viernes 22": hC, "Sábado 23": hC,
-    "Martes 26": hC, "Miércoles 27": hC, "Jueves 28": hC, "Viernes 29": hC, "Sábado 30": hC
+    "Lunes 11": hC, "Martes 12": hC, "Miércoles 13": hC, "Jueves 14": hC, "Viernes 15": hC, "Sábado 16": hC,
+    "Lunes 18": hC, "Martes 19": hC, "Miércoles 20": hC, "Jueves 21": hC, "Viernes 22": hC, "Sábado 23": hC,
+    "Lunes 25": hC, "Martes 26": hC, "Miércoles 27": hC, "Jueves 28": hC, "Viernes 29": hC, "Sábado 30": hC
 };
 
 const nombresDias = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
