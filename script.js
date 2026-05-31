@@ -22,18 +22,21 @@ function init() {
     const hoy = new Date().getDate();
     if (!sD) return;
     sD.innerHTML = '';
+    
     Object.keys(disp).forEach(d => {
         const numeroDia = parseInt(d.match(/\d+/));
-        if (numeroDia >= hoy) {
+        
+        // El truco del 32 para que salte a junio completo sin cortarse en el 10
+        if (numeroDia >= hoy || (hoy === 31 && numeroDia < 32)) {
             let o = document.createElement('option');
             o.value = d; o.text = d;
             sD.appendChild(o);
         }
     });
+    
     if (sD.options.length > 0) upd(); 
     cargarReseñas();
 
-    // LÓGICA DE ESTRELLAS CORREGIDA
     const stars = document.querySelectorAll('.star');
     stars.forEach(s => {
         s.onclick = (e) => {
@@ -44,7 +47,7 @@ function init() {
             });
         };
     });
-} 
+}
 
 async function upd() {
     if (!sD.value) return;
