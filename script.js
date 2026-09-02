@@ -3,12 +3,32 @@ const urlAPI = 'https://script.google.com/macros/s/AKfycbw87nIVDPQ6bNHsXONfJRHzX
 const hC = ["09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00"];
 
 const disp = {
-    "Sábado 1": hC,
-    "Lunes 3": hC, "Martes 4": hC, "Miércoles 5": hC, "Jueves 6": hC, "Viernes 7": hC, "Sábado 8": hC,
-    "Lunes 10": hC, "Martes 11": hC, "Miércoles 12": hC, "Jueves 13": hC, "Viernes 14": hC, "Sábado 15": hC,
-    "Lunes 17": hC, "Martes 18": hC, "Miércoles 19": hC, "Jueves 20": hC, "Viernes 21": hC, "Sábado 22": hC,
-    "Lunes 24": hC, "Martes 25": hC, "Miércoles 26": hC, "Jueves 27": hC, "Viernes 28": hC, "Sábado 29": hC,
-    "Lunes 31": hC
+    "Martes 1": hC,
+    "Miércoles 2": hC,
+    "Jueves 3": hC,
+    "Viernes 4": hC,
+    "Sábado 5": hC,
+    "Lunes 7": hC,
+    "Martes 8": hC,
+    "Miércoles 9": hC,
+    "Jueves 10": hC,
+    "Viernes 11": hC,
+    "Sábado 12": hC,
+    "Lunes 14": hC,
+    "Martes 15": hC,
+    "Miércoles 16": hC,
+    "Jueves 17": hC,
+    "Viernes 18": hC,
+    "Sábado 19": hC,
+    "Lunes 21": hC,
+    "Martes 22": hC,
+    "Miércoles 23": hC,
+    "Jueves 24": hC,
+    "Viernes 25": hC,
+    "Sábado 26": hC,
+    "Lunes 28": hC,
+    "Martes 29": hC,
+    "Miércoles 30": hC
 };
 
 const nombresDias = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
@@ -22,10 +42,10 @@ function init() {
     const hoy = new Date().getDate();
     if (!sD) return;
     sD.innerHTML = '';
-    
+
     Object.keys(disp).forEach(d => {
         const numeroDia = parseInt(d.match(/\d+/));
-        
+
         // El truco del 32 para que salte a junio completo sin cortarse en el 10
         if (numeroDia >= hoy || (hoy === 31 && numeroDia < 32)) {
             let o = document.createElement('option');
@@ -33,8 +53,8 @@ function init() {
             sD.appendChild(o);
         }
     });
-    
-    if (sD.options.length > 0) upd(); 
+
+    if (sD.options.length > 0) upd();
     cargarReseñas();
 
     const stars = document.querySelectorAll('.star');
@@ -97,7 +117,7 @@ async function enviarReseña() {
     const n = document.getElementById('rev-nombre').value;
     const c = document.getElementById('rev-comentario').value;
     if (!n || !c || estrellasSel === 0) return alert("Por favor completá todo.");
-    
+
     try {
         await fetch(`${urlAPI}?sheet=Reseñas`, {
             method: 'POST', mode: 'no-cors',
@@ -113,7 +133,7 @@ async function cargarReseñas() {
     try {
         const res = await fetch(`${urlAPI}?sheet=Reseñas`);
         const datos = await res.json();
-        
+
         cont.innerHTML = ''; // Limpia el contenedor
 
         // === AGREGÁ ESTE BLOQUE AQUÍ ===
@@ -129,7 +149,7 @@ async function cargarReseñas() {
             const div = document.createElement('div');
             div.className = 'resena-card';
             const e = parseInt(r.estrellas) || 5;
-            div.innerHTML = `<strong>${r.nombre}</strong><div style="color:#C5A059">${'★'.repeat(e)}${'☆'.repeat(5-e)}</div><p>${r.comentario}</p>`;
+            div.innerHTML = `<strong>${r.nombre}</strong><div style="color:#C5A059">${'★'.repeat(e)}${'☆'.repeat(5 - e)}</div><p>${r.comentario}</p>`;
             cont.appendChild(div);
         });
     } catch (e) { cont.innerHTML = "No hay reseñas aún."; }
